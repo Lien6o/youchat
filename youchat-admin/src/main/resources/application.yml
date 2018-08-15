@@ -1,0 +1,22 @@
+server:
+  session-timeout: 1800
+  port: 8080
+
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+#  profiles:
+#    active: dev
+  servlet:
+    multipart:
+      max-file-size: 30Mb
+      max-request-size: 30Mb
+# 熱部署
+  devtools:
+    restart:
+      enabled: true
+
