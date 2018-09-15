@@ -24,7 +24,7 @@ public class ReloadCache {
     /**
      * 线程池
      */
-    private static final ExecutorService executorService = new ThreadPoolExecutor(2, 4, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<>(10),
+       private static final ExecutorService executorService = new ThreadPoolExecutor(2, 4, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<>(10),
             new ThreadFactory() {
 
                 @Override
@@ -46,8 +46,13 @@ public class ReloadCache {
      * @author lienbo
      */
     private static ListeningExecutorService backgroundRefreshPools = MoreExecutors.listeningDecorator(executorService);
+
     /**
-     * @author lienbo
+     * @Description:
+     * @Param:
+     * @return:
+     * @Author: lien6o
+     * @Date: 2018/8/21
      */
     public static final LoadingCache<String, String> cache = CacheBuilder.newBuilder()
             .refreshAfterWrite(100,
