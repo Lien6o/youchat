@@ -6,49 +6,45 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
-import lombok.extern.slf4j.Slf4j;
 
-
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @program: youchat-common
- * @description:
+ * @description: Guava cache缓存
  * @author: lien6o
  * @create: 2018-08-17 13:53
  **/
 public class ReloadCache {
     private static LongAdder threadAdder = new LongAdder();
     private static final String THREAD_NAME = "local_cache_refresh_";
+
     /**
      * 线程池
      */
-       private static final ExecutorService executorService = new ThreadPoolExecutor(2, 4, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<>(10),
-            new ThreadFactory() {
-
-                @Override
-                public Thread newThread(Runnable r) {
-                    threadAdder.increment();
-                    return new Thread(r, THREAD_NAME
-                            + threadAdder.intValue());
-                }
-            }, new RejectedExecutionHandler() {
-
-        @Override
-        public void rejectedExecution(Runnable r,
-                                      ThreadPoolExecutor executor) {
-        }
+    private static final ExecutorService executorService = new ThreadPoolExecutor(2, 4, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<>(10),
+            r -> {
+                threadAdder.increment();
+                return new Thread(r, THREAD_NAME + threadAdder.intValue());
+            }, (r, executor) -> {
     });
+
     /**
      * 异步刷新线程池
      *
-     * @author lienbo
      */
     private static ListeningExecutorService backgroundRefreshPools = MoreExecutors.listeningDecorator(executorService);
 
+
     /**
-     * @Description:
+     * @Description: cache
      * @Param:
      * @return:
      * @Author: lien6o

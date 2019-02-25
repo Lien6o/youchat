@@ -25,14 +25,14 @@ public class Lock<K, V> {
         if (lockName == null || lockCallBack == null) {
             throw new NullPointerException();
          }
-//      try (DisLock lock = DisLockSingleton.getInstance().newLock(lockName)) {
-//            if (lock.acquire(acquireTime <= 0 ? 5 : acquireTime)) {
-//                return lockCallBack.onSuccess(null);
-//            }
-//     } catch (Exception e) {
-//           return lockCallBack.onException(param, e);
-//        }
-         return lockCallBack.onFailure(null);
+//        try (DisLock lock = DisLockSingleton.getInstance().newLock(lockName)) {
+//               if (lock.acquire(acquireTime <= 0 ? 5 : acquireTime)) {
+//                   return lockCallBack.onSuccess(null);
+//               }
+//        } catch (Exception e) {
+//              return lockCallBack.onException(param, e);
+//           }
+       return lockCallBack.onFailure(null);
     }
 
     public static void main(String[] args) throws InterruptedException {

@@ -17,4 +17,6 @@ public class WebSocketConfig {
         return new ServerEndpointExporter();
     }
 
+   private String s = "";
+
 }
