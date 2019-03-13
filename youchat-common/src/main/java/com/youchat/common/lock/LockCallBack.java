@@ -6,7 +6,7 @@ package com.youchat.common.lock;
  * @author: lien6o
  * @create: 2018-08-16 20:20
  **/
-public interface LockCallBack<K, V> {
+public interface LockCallBack<V> {
 
     /**
      * @Description: 获取分布式锁成功
@@ -15,7 +15,7 @@ public interface LockCallBack<K, V> {
      * @Author: lien6o
      * @Date: 2018/08/16
      */
-    V onSuccess(K param);
+    V onSuccess();
 
     /**
      * @Description: 获取分布式锁失败
@@ -24,14 +24,6 @@ public interface LockCallBack<K, V> {
      * @Author: lien6o
      * @Date: 2018/08/16
      */
-    V onFailure(K param);
+    V onFailure();
 
-    /**
-     * @Description: 获取分布式锁异常
-     * @Param:
-     * @return:
-     * @Author: lien6o
-     * @Date: 2018/08/16
-     */
-    V onException(K param, Throwable e);
 }
