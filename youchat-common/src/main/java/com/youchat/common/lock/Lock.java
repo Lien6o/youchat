@@ -8,7 +8,13 @@ package com.youchat.common.lock;
  **/
 public class Lock  {
 
-
+    /**
+     * redis 锁是有问题的。etcd ！
+     * @param redisKey
+     * @param lockCallBack
+     * @param <V>
+     * @return
+     */
     public static<V> V acquireLock(String redisKey, LockCallBack<V> lockCallBack) {
         // long rLock = WRedisUtil.simpleRLock(redisKey, 5);
         long rLock = System.currentTimeMillis();
