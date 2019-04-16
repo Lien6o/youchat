@@ -69,6 +69,14 @@ public class DateTimeUtils {
         return DateTimeUtils.convertLocalDateTime2Timestamp(DateTimeUtils.getSpecifiedMinDateTime(LocalDateTime.now().plusDays(-1).toLocalDate()));
     }
 
+    public static LocalDateTime getYesterdayMaxDateTime() {
+        return  DateTimeUtils.getSpecifiedMaxDateTime(LocalDateTime.now().plusDays(-1).toLocalDate());
+    }
+
+    public static LocalDateTime getYesterdayMinDateTime() {
+        return  DateTimeUtils.getSpecifiedMinDateTime(LocalDateTime.now().plusDays(-1).toLocalDate());
+    }
+
     public static long getTodayMaxTime() {
         return DateTimeUtils.convertLocalDateTime2Timestamp(DateTimeUtils.getNowMaxDateTime());
     }
@@ -241,6 +249,13 @@ public class DateTimeUtils {
         Objects.requireNonNull(formatter, "formatter was null");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(formatter);
         return LocalDateTime.parse(dateTime, dtf);
+    }
+
+    public static LocalTime parseTimeString(String dateTime, String formatter) {
+        Objects.requireNonNull(dateTime, "dateTime was null");
+        Objects.requireNonNull(formatter, "formatter was null");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(formatter);
+        return LocalTime.parse(dateTime, dtf);
     }
 
 }

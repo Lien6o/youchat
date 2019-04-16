@@ -1,8 +1,8 @@
 package com.youchat.common.stream;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @program: youchat-common
@@ -12,7 +12,18 @@ import java.util.stream.Collectors;
  **/
 public class TestSreamApi {
 
+     public void testStream(){
+        Stream.of("AAA,","BBB,","CCC,","DDD").parallel().forEachOrdered(System.out::print);
+    }
+
+
+
     public static void main(String[] args) {
+         // of 接受一个非空的值
+        Optional<String> nullStr = Optional.of("");
+        // ofNullable 可以接受一个null
+        Optional<Object> nullAbleValue = Optional.ofNullable(null);
+
         ArrayList<User> userList = getUserList();
         // 多条件分组
         Map<String, Map<String, List<User>>> map = userList.stream().collect(Collectors.groupingBy(User::getGender, Collectors.groupingBy(User::getHomeAddr)));
