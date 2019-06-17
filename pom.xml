@@ -40,10 +40,13 @@
     </dependencies>
 
     <modules>
-        <module>youchat-server</module>
+
         <module>youchat-common</module>
         <module>youchat-websocket</module>
         <module>youchat-admin</module>
+        <module>youchat-client</module>
+        <module>youchat-dserver</module>
+
     </modules>
 
 
