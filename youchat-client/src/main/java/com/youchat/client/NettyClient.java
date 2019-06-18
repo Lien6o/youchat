@@ -74,14 +74,13 @@ public class NettyClient {
     public void sendData(){
 
         for(int i =0; i <100000; i++){
-            long start = System.currentTimeMillis();
+
             TranslatorData request = new TranslatorData();
             request.setId("" + i);
             request.setName("请求消息名称 " + i);
             request.setMessage("请求消息内容 " + i);
             this.channel.writeAndFlush(request);
-            System.out.println("System.currentTimeMillis()-start = " + (System.currentTimeMillis() - start));
-        }
+         }
     }
 
     public void close() throws Exception {

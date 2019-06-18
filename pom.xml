@@ -46,6 +46,7 @@
         <module>youchat-admin</module>
         <module>youchat-client</module>
         <module>youchat-dserver</module>
+        <module>youchat-quick-start</module>
 
     </modules>
 
