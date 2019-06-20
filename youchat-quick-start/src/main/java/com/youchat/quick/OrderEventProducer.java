@@ -19,6 +19,8 @@ public class OrderEventProducer {
     }
 
     public void sendData(ByteBuffer data) {
+        System.out.println("生产者发送消息  send data ");
+
         //1 在生产者发送消息的时候, 首先 需要从我们的ringBuffer里面 获取一个可用的序号
         long sequence = ringBuffer.next();	//0
         try {

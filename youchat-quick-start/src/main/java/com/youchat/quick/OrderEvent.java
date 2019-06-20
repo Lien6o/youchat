@@ -1,6 +1,5 @@
 package com.youchat.quick;
 
-import javafx.event.Event;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  * @version: v1.0
  */
 @Data
-public class OrderEvent extends Event {
+public class OrderEvent  {
     private long value;
 
 }
