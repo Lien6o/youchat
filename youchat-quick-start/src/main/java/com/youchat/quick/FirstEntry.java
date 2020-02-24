@@ -6,6 +6,8 @@ import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,7 +19,12 @@ import java.util.concurrent.Executors;
  */
 public class FirstEntry {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        //  disruptTest();
+       arraySet();
+    }
+
+    private static void disruptTest() {
         OrderEventFactory orderEventFactory = new OrderEventFactory();
         int ringBufferSize = 4;
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() / 2);
@@ -46,19 +53,43 @@ public class FirstEntry {
 
         ByteBuffer bb = ByteBuffer.allocate(8);
         long l = System.currentTimeMillis();
-        for(long i = 0 ; i < 500000; i ++){
+        for(long i = 0 ; i < 1000000; i ++){
             bb.putLong(0, i);
             producer.sendData(bb);
         }
         System.out.println(System.currentTimeMillis() - l);
         disruptor.shutdown();
         executor.shutdown();
+    }
 
-        long ll = System.currentTimeMillis();
-        for(long i = 0 ; i < 500000; i ++){
-            System.out.print("消费者: 499994消费者: 499995zzf");
+    public static void arraySet() throws InterruptedException {
+
+        ArrayBlockingQueue<Long> queue = new ArrayBlockingQueue<>(1000000);
+        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() / 2);
+
+        for (long i = 0; i < 1000000; i++) {
+             queue.put(i);
+            System.out.println(i);
         }
-        System.out.println(System.currentTimeMillis() - ll);
+        long l = System.currentTimeMillis();
+        CountDownLatch countDownLatch = new CountDownLatch(1000000);
+        for (long i = 0; i < 1000000; i++) {
+            executor.submit(() -> {
+                try {
+                    Long take = queue.take();
+                 System.out.println("消费者：" + take);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    countDownLatch.countDown();
+                }
+            });
+        }
+
+        countDownLatch.await();
+
+        System.err.println(System.currentTimeMillis() - l);
+
 
     }
 }

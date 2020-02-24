@@ -10,5 +10,5 @@ import redis.clients.jedis.Jedis;
  */
 @FunctionalInterface
 public interface RedisCaller {
-      void call(Jedis jedis);
-}
+        void call(Jedis jedis);
+        }

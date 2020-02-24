@@ -51,7 +51,6 @@ public class NettyServer {
             ChannelFuture cf = serverBootstrap.bind(8765).sync();
             System.err.println("Server Startup...");
             cf.channel().closeFuture().sync();
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
