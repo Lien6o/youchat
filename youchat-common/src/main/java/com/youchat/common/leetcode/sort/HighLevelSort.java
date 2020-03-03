@@ -1,4 +1,4 @@
-package com.youchat.common.sort;
+package com.youchat.common.leetcode.sort;
 
 import java.util.Arrays;
 
