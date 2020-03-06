@@ -11,8 +11,9 @@ import java.util.Arrays;
 public class HighLevelSort {
 
     private static int[] array = {6, 35, 23, 1, 67, 20, 9, 18, 99, 0, 13, 7};
-
+      static String rashomom ;
     public static void main(String[] args) {
+        rashomom = "";
         System.out.println(Arrays.toString(mergeSort(array, 0, array.length - 1)));
     }
 
@@ -49,6 +50,7 @@ public class HighLevelSort {
         }
         // 把右边边剩余的数移入数组
         while (j <= high) {
+
             temp[k++] = array[j++];
         }
         // 把新数组中的数覆盖nums数组
