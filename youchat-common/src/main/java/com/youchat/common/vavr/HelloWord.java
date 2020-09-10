@@ -1,11 +1,17 @@
 package com.youchat.common.vavr;
 
+import java.util.function.Function;
+
 import io.vavr.Lazy;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.Tuple3;
 import io.vavr.collection.List;
 import io.vavr.control.Try;
+
+import static io.vavr.API.$;
+import static io.vavr.API.Case;
+import static io.vavr.API.Match;
 
 
 /**
@@ -55,14 +61,22 @@ public class HelloWord {
     }
 
     public static void tryExceptions() {
+        String aaa = null;
         Try<Integer> result = Try.of(() -> {
             int c = 1 / 0;
-            throw new RuntimeException("");
+            throw new RuntimeException(aaa);
         });
-
         result.andThen(() -> {
             System.out.println("andThen");
         });
+        result.getOrElseThrow((Function<Throwable, RuntimeException>) RuntimeException::new);
+        Throwable cause = result.getCause();
+        if (cause instanceof Exception) {
+
+        }
+        if (cause instanceof RuntimeException) {
+            return;
+        }
         System.out.println(result.getCause());
         System.out.println(result.isSuccess());
         result.andFinally(() -> System.out.println("andFinally"));
@@ -70,7 +84,11 @@ public class HelloWord {
         java.util.List<Integer> lists = List.of(1, 2, 3).asJava();
         Lazy<Double> lazy = Lazy.of(Math::random);
         Lazy<String> string = Lazy.of(() -> "2222");
-
+        String of = Match(1).of(
+                Case($(1), "one"),
+                Case($(2), "two"),
+                Case($(3), "three"),
+                Case($(4), "?"));
     }
 
 }
