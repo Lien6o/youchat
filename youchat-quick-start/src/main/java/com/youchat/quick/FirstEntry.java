@@ -20,8 +20,8 @@ import java.util.concurrent.Executors;
 public class FirstEntry {
 
     public static void main(String[] args) throws InterruptedException {
-        //  disruptTest();
-       arraySet();
+         disruptTest();
+        // arraySet();
     }
 
     private static void disruptTest() {
@@ -45,7 +45,7 @@ public class FirstEntry {
 
         //3. 启动disruptor
         disruptor.start();
-
+        // ------------------------------------------------------------------------------------------------------------
         //4. 获取实际存储数据的容器: RingBuffer
         RingBuffer<OrderEvent> ringBuffer = disruptor.getRingBuffer();
 
@@ -53,7 +53,7 @@ public class FirstEntry {
 
         ByteBuffer bb = ByteBuffer.allocate(8);
         long l = System.currentTimeMillis();
-        for(long i = 0 ; i < 1000000; i ++){
+        for(long i = 0 ; i < 10; i ++){
             bb.putLong(0, i);
             producer.sendData(bb);
         }
@@ -64,7 +64,7 @@ public class FirstEntry {
 
     public static void arraySet() throws InterruptedException {
 
-        ArrayBlockingQueue<Long> queue = new ArrayBlockingQueue<>(1000000);
+        ArrayBlockingQueue<Long> queue = new ArrayBlockingQueue<>(100);
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() / 2);
 
         for (long i = 0; i < 1000000; i++) {
@@ -72,7 +72,7 @@ public class FirstEntry {
             System.out.println(i);
         }
         long l = System.currentTimeMillis();
-        CountDownLatch countDownLatch = new CountDownLatch(1000000);
+        CountDownLatch countDownLatch = new CountDownLatch(100);
         for (long i = 0; i < 1000000; i++) {
             executor.submit(() -> {
                 try {
