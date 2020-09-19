@@ -2,13 +2,14 @@ package com.youchat.common.whiteboard;
 
 public class TwoThreadOutputV2 {
 
-    private static volatile  boolean loopForOdd = true;
+    private static    boolean loopForOdd = true;
 
-    private static   boolean loopForEven = true;
+    private static    boolean loopForEven = true;
 
     private static  int counter = 1;
 
     public static void main(String[] args) throws InterruptedException {
+
         // 奇数线程
         new Thread(() -> {
             while (true) {
