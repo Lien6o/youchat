@@ -16,7 +16,7 @@ package com.youchat.common.leetcode;
  * 9. 分隔链表
  * 10. 链表元素按奇偶聚集
  */
-public class List {
+public class MyList {
 
      class ListNode {
          int val;
