@@ -16,7 +16,7 @@ public class SpiralOrder {
         int m = matrix.length;
         //n是矩阵的列数
         int n = matrix[0].length;
-        //大循环，从外向内逐层遍历矩阵
+        // 大循环，从外向内逐层遍历矩阵
         /*
          *
          * ----------->
@@ -27,20 +27,20 @@ public class SpiralOrder {
          *
          */
         for (int c = 0; c < (Math.min(m, n) + 1) / 2; c++) {
-            //从左到右遍历“上边”
+            // 从左到右遍历“上边”
             for (int j = c; j < n - c; j++) {
                 // 行不变 c 不变，j 变
                 list.add(matrix[c][j]);
             }
-            //从上到下遍历“右边” int j = c + 1 : 去掉拐角
+            // 从上到下遍历“右边” int j = c + 1 : 去掉拐角
             for (int j = c + 1; j < m - c; j++) {
                 list.add(matrix[j][(n - 1) - c]);
             }
-            //从右到左遍历“下边”
+            // 从右到左遍历“下边”
             for (int j = c + 1; j < n - c; j++) {
                 list.add(matrix[(m - 1) - c][(n - 1) - j]);
             }
-            //从下到上遍历“左边”
+            // 从下到上遍历“左边”
             for (int j = c + 1; j < m - 1 - c; j++) {
                 list.add(matrix[(m - 1) - j][c]);
             }
