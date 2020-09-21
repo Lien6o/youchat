@@ -20,17 +20,20 @@ public class PriorityQueueEat {
         priorityQueue.add(2);
         priorityQueue.add(3);
 
-/*
-[0, 1, 2, 3, 4, 6, 9, 5]
-
- * 小顶堆 任意一个非叶子节点的权值，都"不大于"其左右子节点的权值
- *        0
- *    1       2
- *  3   4   6   9
- *5
- *
- *
- */
+        /*
+         *[0, 1, 2, 3, 4, 6, 9, 5]
+         *
+         * 小顶堆 任意一个非叶子节点的权值，都"不大于"其左右子节点的权值
+         *          0
+         *      1       2
+         *    3   4   6   9
+         *  5
+         * priorityQueue.remove()
+         *          1
+         *      3       2
+         *    5   4   6   9
+         *
+         */
         System.out.println(priorityQueue);
         Integer element = priorityQueue.element();
         System.out.println(element);
