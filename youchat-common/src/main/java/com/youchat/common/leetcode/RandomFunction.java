@@ -68,7 +68,9 @@ public class RandomFunction {
         System.out.println(map);
     }
 
-
+    /**
+     * 目标函数 等概率生成 [c,d]
+     */
     private static int g(int a, int b, int c, int d) {
         // 0 - h
         int h = d - c;
