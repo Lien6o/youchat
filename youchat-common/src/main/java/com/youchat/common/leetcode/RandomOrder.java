@@ -26,7 +26,7 @@ public class RandomOrder {
         int length = array.length;
         for (int i = 0; i < length; i++) {
             int hash = UUID.randomUUID().toString().hashCode();
-            int r = (hash < 0 ? hash * -1 : hash) % length;
+            int r = (hash < 0 ? (hash * -1) : hash) % length;
             int temp = array[i];
             array[i] = array[r];
             array[r] = temp;
