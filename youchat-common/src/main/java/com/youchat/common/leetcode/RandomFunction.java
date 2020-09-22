@@ -34,14 +34,6 @@ public class RandomFunction {
         public int getNext() {
             return new Random().nextInt(max - min + 1) + min;
         }
-
-        public int min() {
-            return this.min;
-        }
-
-        public int max() {
-            return this.max;
-        }
     }
 
     public static void main(String[] args) {
