@@ -37,7 +37,7 @@ public class RandomFunction {
     }
 
     public static void main(String[] args) {
-        testG();
+        testBinaryGen();
     }
 
     private static void testG() {
@@ -83,6 +83,10 @@ public class RandomFunction {
 
     /**
      * 该函数只能返回 0 1  并且概率都是 50%
+     *
+     * f   ： 1-4
+     * f'  ： 0-3
+     * mid ： 2
      */
     private static int binaryGen(int min, int max) {
         RandomOriginal f = new RandomOriginal(min, max);
@@ -90,20 +94,10 @@ public class RandomFunction {
         boolean isOdd = (size & 1) == 1;
         int mid = min + (max - min) / 2;
         int next;
-        int r = 0;
         do {
             next = f.getNext();
-            if (isOdd) {
-                if (next < mid) {
-                    r = 1;
-                }
-            } else {
-                if (next <= mid) {
-                    r = 1;
-                }
-            }
         } while (isOdd && next == mid);
-        return r;
+        return next > mid ? 0 : 1;
     }
 
     private static void testBinaryGen() {
