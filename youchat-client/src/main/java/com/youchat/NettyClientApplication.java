@@ -6,9 +6,9 @@ import com.youchat.client.MessageConsumerImpl4Client;
 import com.youchat.client.NettyClient;
 import com.youchat.common.disruptor.MessageConsumer;
 import com.youchat.common.disruptor.RingBufferWorkerPoolFactory;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author: Lien6o
@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version: v1.0
  */
 @SpringBootApplication
+@Import(cn.hutool.extra.spring.SpringUtil.class)
 public class NettyClientApplication {
 
     public static void main(String[] args) {
