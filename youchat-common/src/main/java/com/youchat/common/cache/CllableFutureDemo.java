@@ -1,21 +1,10 @@
 package com.youchat.common.cache;
 
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import com.google.common.util.concurrent.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Nullable;
-
-import lombok.extern.slf4j.Slf4j;
+import java.util.concurrent.*;
 
 /**
  * @author: Lien6o
@@ -37,7 +26,7 @@ public class CllableFutureDemo {
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-            log.info(" k=s act=cu_thread_pool_executor executorActiveCount={}", executor.getActiveCount());
+            // log.info(" k=s act=cu_thread_pool_executor executorActiveCount={}", executor.getActiveCount());
         }
     }
 
