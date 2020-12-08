@@ -6,7 +6,7 @@ package com.youchat.common.leetcode.sort;
  * @date: 2020/3/4 6:42 下午
  * @version: v1.0
  */
-public class TreeSort {
+public class TreeSortDFS {
 
       static class Node {
         private int data;
