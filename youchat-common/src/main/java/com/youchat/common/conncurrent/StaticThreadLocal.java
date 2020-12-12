@@ -54,8 +54,6 @@ public class StaticThreadLocal {
         t1.print();
         t2.print();
         t3.print();
-
-
     }
 
     private static class TestClient extends Thread{

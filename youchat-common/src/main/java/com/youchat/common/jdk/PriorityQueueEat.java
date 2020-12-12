@@ -1,5 +1,7 @@
 package com.youchat.common.jdk;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -10,7 +12,7 @@ public class PriorityQueueEat {
 
     public static void main(String[] args) {
 
-        Queue<Integer> priorityQueue = new PriorityQueue<>();
+        Queue<Integer> priorityQueue = new PriorityQueue<>(Comparator.reverseOrder());
         priorityQueue.add(4);
         priorityQueue.add(6);
         priorityQueue.add(9);
@@ -34,10 +36,8 @@ public class PriorityQueueEat {
          *    5   4   6   9
          *
          */
-        System.out.println(priorityQueue);
-        Integer element = priorityQueue.element();
-        System.out.println(element);
-        Integer peek = priorityQueue.remove();
-        System.out.println(priorityQueue);
+        System.out.println("priorityQueue = " + priorityQueue);
+
+        System.out.println("priorityQueue.toArray() = " + Arrays.toString(priorityQueue.toArray()));
     }
 }
