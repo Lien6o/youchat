@@ -40,7 +40,7 @@ public class ReloadCache {
      * 异步刷新线程池
      *
      */
-    private static ListeningExecutorService backgroundRefreshPools = MoreExecutors.listeningDecorator(executorService);
+    private static final ListeningExecutorService BACKGROUND_REFRESH_POOLS = MoreExecutors.listeningDecorator(executorService);
 
 
     /**
@@ -65,7 +65,7 @@ public class ReloadCache {
                 public ListenableFuture<String> reload(
                         String key,
                         String oldValue) {
-                    return backgroundRefreshPools.submit(ReloadCache::getNewValue);
+                    return BACKGROUND_REFRESH_POOLS.submit(ReloadCache::getNewValue);
                 }
             });
 
