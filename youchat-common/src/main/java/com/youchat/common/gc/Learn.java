@@ -2,6 +2,16 @@ package com.youchat.common.gc;
 
 public class Learn {
     /**
+     * JVM 参数误用/使用不当 Top 5
+     * 1、堆震荡问题:堆内存最大值和最小值没有设置成一致
+     * 2、CMS 垃圾回收器的 老年代回收阈值 参数使用错误
+     * 3、大内存(> 6 G)却使用了单线程垃圾回收器
+     * 4、内存大小分配:新生代大小分配过低、堆大小设置过大
+     * 5、根据某优化指南 禁用了显式GC( -XX:+DisableExplicitGC)
+     * 6、GC 日志缺失(-XX:+PrintGCDetails)、GC 日志或 Heap dump日志路径配置不当
+     */
+
+    /**
      *理论部分
      *
      *
@@ -69,7 +79,7 @@ public class Learn {
      *
      * Minor GC -> GC in Young Generation
      * Major GC -> GC in Old Generation （很多地方都会把Major GC等价于Full GC，甚至一些知名内存监控工具都有这个概念混淆的问题）
-     * Full GC -> GC in Young + Old + Permanent (Oracle Hotspot only)
+     * Full  GC -> GC in Young + Old + Permanent (Oracle Hotspot only)
      *
      *
      * GC Hang：所有的GC都会导致GC期间程序hang住(即使是CMS也有2个小的全Hang的窗口)，Minor GC也不例外(只是它一般很快所以被忽视)，其实原因也好理解，GC过程中一般都会涉及对象地址的变化，不hang住重新算完地址再开放控制权给应用程序，很容易就不work了.

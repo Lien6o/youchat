@@ -10,7 +10,7 @@ public class BinarySearch {
     /**
      * 折线
      */
-    private static int[] polylineArray = {4, 5, 6, 1, 2, 3};
+    private static int[] polylineArray = {1, 5, 6, 10, 20, 30};
 
     public static int polylineSearch(int[] polylineArray, int value) {
         int low = 0;
@@ -33,8 +33,26 @@ public class BinarySearch {
         return -1;
     }
 
+    public static int commonSearch(int[] array, int value) {
+        int left = 0;
+        int right = array.length - 1;
+        while (left <= right) {
+            int mid = left + ((right - left) >>> 1);
+            int midValue = array[mid];
+            if (midValue == value) {
+                return mid;
+            }
+            if (value > midValue) {
+                left = mid+1;
+            }else   {
+                right = mid-1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
-        int i = polylineSearch(polylineArray,5);
+        int i = commonSearch(polylineArray,10);
         System.out.println(i);
     }
 }
