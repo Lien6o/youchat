@@ -77,4 +77,5 @@ public class ConsistentHash<T> {
         //正好命中
         return circle.get(hash);
     }
+    
 }
