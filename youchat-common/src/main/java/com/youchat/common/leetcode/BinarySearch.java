@@ -33,19 +33,19 @@ public class BinarySearch {
         return -1;
     }
 
-    public static int commonSearch(int[] array, int value) {
+    public static int commonSearch(int[] array, int target) {
         int left = 0;
         int right = array.length - 1;
         while (left <= right) {
             int mid = left + ((right - left) >>> 1);
             int midValue = array[mid];
-            if (midValue == value) {
+            if (midValue == target) {
                 return mid;
             }
-            if (value > midValue) {
-                left = mid+1;
-            }else   {
-                right = mid-1;
+            if (target > midValue) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
         return -1;

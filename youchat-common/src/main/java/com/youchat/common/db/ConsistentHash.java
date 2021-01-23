@@ -15,6 +15,7 @@ import java.util.UUID;
  * 为了解决这种数据倾斜问题，一致性哈希算法引入了虚拟节点机制，即对每一个服务节点计算多个哈希，每个计算结果位置都放置一个此服务节点，称为虚拟节点。
  */
 public class ConsistentHash<T> {
+
     /**
      * Hash算法对象，用于自定义hash算法
      */
@@ -26,10 +27,12 @@ public class ConsistentHash<T> {
      * Hash计算对象，用于自定义hash算法
      */
     HashFunc hashFunc;
+
     /**
      * 复制的节点个数
      */
     private final int numberOfReplicas;
+
     /**
      * 一致性Hash环
      * Long 服务器hash ;
@@ -63,7 +66,9 @@ public class ConsistentHash<T> {
         }
     }
 
-    //获得离数据顺时针最近的节点
+    /**
+     * 获得离数据顺时针最近的节点
+     */
     public T get(Object key) {
         if (circle.isEmpty()) {
             return null;
@@ -77,5 +82,4 @@ public class ConsistentHash<T> {
         //正好命中
         return circle.get(hash);
     }
-    
 }
