@@ -8,7 +8,7 @@ public class InjectServiceImpl implements InjectService{
      * 这个注解 造成了这个问题。是祸根之所在！！！！
      *
      */
-    @Autowired
+    @Autowired(required = false)
     private RemoteClient remoteClient;
 
      public InjectServiceImpl(RemoteClient remoteClient) {
