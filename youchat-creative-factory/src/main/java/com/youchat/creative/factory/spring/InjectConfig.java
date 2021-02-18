@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class InjectConfig {
 
-    public static final RemoteClient remoteClient = RemoteClient.builder().ipAddr("127.0.0.1").type("1").build();
-
-    public static final RemoteClient remoteClientV2 = RemoteClient.builder().ipAddr("127.0.0.2").type("2").build();
-
+//    public static final RemoteClient remoteClient = RemoteClient.builder().ipAddr("127.0.0.1").type("1").build();
+//
+//    public static final RemoteClient remoteClientV2 = RemoteClient.builder().ipAddr("127.0.0.2").type("2").build();
+//
 
    @Bean
    public RemoteClient remoteClientV2() {
@@ -21,18 +21,18 @@ public class InjectConfig {
    }
 
     @Bean
-    public InjectService injectServiceV2( ) {
+    public InjectService injectServiceV2(RemoteClient remoteClientV2 ) {
         return new InjectServiceImpl(remoteClientV2);
     }
 
     @Bean
-    public RemoteClient remoteClient() {
+    public RemoteClient remoteClientV1() {
         return RemoteClient.builder().ipAddr("127.0.0.1").type("1").build();
     }
 
     @Bean
-    public InjectService injectService( ) {
-        return new InjectServiceImpl(remoteClient);
+    public InjectService injectService( RemoteClient remoteClientV1 ) {
+        return new InjectServiceImpl(remoteClientV1);
     }
 
 

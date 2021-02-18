@@ -22,7 +22,6 @@ public class Singleton {
 
         Singleton instance1 = Singleton.getInstance();
         System.out.println(instance1);
-
         System.out.println(Double.parseDouble("3.12"));
     }
 }

@@ -17,8 +17,8 @@ public class MainEntry {
          * System.out.println(bean);
          */
 
-        System.out.println(applicationContext.getBean("remoteClientV2"));
+       // System.out.println(applicationContext.getBean("remoteClientV2"));
 
-        System.out.println(applicationContext.getBean("remoteClient"));
+       // System.out.println(applicationContext.getBean("remoteClient"));
     }
 }

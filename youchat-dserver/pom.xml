@@ -33,7 +33,6 @@
         <dependency>
             <groupId>lien6o</groupId>
             <artifactId>youchat-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
 
