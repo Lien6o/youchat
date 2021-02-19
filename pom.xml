@@ -169,8 +169,6 @@
         <module>youchat-client</module>
         <module>youchat-dserver</module>
         <module>youchat-quick-start</module>
-        <module>youchat-account-client</module>
-        <module>youchat-account-server</module>
         <module>youchat-creative-factory</module>
     </modules>
 
