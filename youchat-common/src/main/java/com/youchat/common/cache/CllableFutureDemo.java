@@ -1,6 +1,5 @@
 package com.youchat.common.cache;
 
-import com.google.common.util.concurrent.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Nullable;

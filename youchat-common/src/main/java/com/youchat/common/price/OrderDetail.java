@@ -7,9 +7,9 @@ package com.youchat.common.price;
  * @version: v1.0
  */
 
-import java.math.BigDecimal;
-
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 /**
  * 详细订单

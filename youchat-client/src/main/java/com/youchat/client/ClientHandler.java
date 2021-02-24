@@ -3,7 +3,6 @@ package com.youchat.client;
 import com.youchat.common.disruptor.MessageProducer;
 import com.youchat.common.disruptor.RingBufferWorkerPoolFactory;
 import com.youchat.common.entity.TranslatorData;
-
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

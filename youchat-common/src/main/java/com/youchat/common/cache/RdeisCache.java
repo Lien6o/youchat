@@ -1,11 +1,10 @@
 package com.youchat.common.cache;
 
 import com.youchat.common.utils.JedisExecutor;
-
-import java.util.List;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
+
+import java.util.List;
 
 /**
  * @author: Lien6o

@@ -1,8 +1,8 @@
 package com.youchat.common.clone;
 
-import java.time.LocalDateTime;
-
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * @author: Lien6o

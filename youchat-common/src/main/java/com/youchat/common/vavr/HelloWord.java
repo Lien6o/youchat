@@ -1,7 +1,5 @@
 package com.youchat.common.vavr;
 
-import java.util.function.Function;
-
 import io.vavr.Lazy;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
@@ -9,9 +7,9 @@ import io.vavr.Tuple3;
 import io.vavr.collection.List;
 import io.vavr.control.Try;
 
-import static io.vavr.API.$;
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
+import java.util.function.Function;
+
+import static io.vavr.API.*;
 
 
 /**

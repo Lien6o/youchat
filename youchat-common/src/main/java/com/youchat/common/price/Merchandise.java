@@ -7,10 +7,10 @@ package com.youchat.common.price;
  * @version: v1.0
  */
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Map;
-
-import lombok.Data;
 
 /**
  * 商品
