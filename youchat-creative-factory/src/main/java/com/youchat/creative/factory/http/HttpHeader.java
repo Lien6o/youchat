@@ -2,13 +2,10 @@ package com.youchat.creative.factory.http;
 
 import com.google.common.base.Splitter;
 import lombok.Data;
-import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,37 +23,37 @@ import java.util.Map;
 //      Sec-Fetch-Dest: document
 //      Accept-Encoding: gzip, deflate, br
 //      Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7
-@Getter
+@Data
 public class HttpHeader {
 
-    @SneakyThrows
-    public HttpHeader(BufferedReader reader) {
-        String first = reader.readLine();
-        List<String> strings = Splitter.on(' ').splitToList(first);
-        String s = strings.get(0);
-        switch (s){
-            case "GET":
-                this.requestMethod = HttpEnum.GET;
-                break;
-            case "POST":
-                this.requestMethod = HttpEnum.POST;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + s);
-        }
-        this.path = strings.get(1);
-        this.httpVersion = strings.get(2);
-        this.paramMap = getParameter(this.path);
+     @SneakyThrows
+     public HttpHeader(BufferedReader reader) {
+         String first = reader.readLine();
+         List<String> strings = Splitter.on(' ').splitToList(first);
+         String s = strings.get(0);
+         switch (s){
+             case "GET":
+                 this.requestMethod = HttpEnum.GET;
+                 break;
+             case "POST":
+                 this.requestMethod = HttpEnum.POST;
+                 break;
+             default:
+                 throw new IllegalStateException("Unexpected value: " + s);
+         }
+         this.path = strings.get(1);
+         this.httpVersion = strings.get(2);
+         this.paramMap = getParameter(this.path);
 
-        for (; ; ) {
-            String header = reader.readLine();
-            // 读取到空行时, HTTP Header读取完毕
-            if (header.isEmpty()) {
-                break;
-            }
-            System.out.println(header);
-        }
-    }
+         for (; ; ) {
+             String header = reader.readLine();
+             // 读取到空行时, HTTP Header读取完毕
+             if (header.isEmpty()) {
+                 break;
+             }
+             System.out.println(header);
+         }
+     }
 
     private Map<String,String> paramMap;
 

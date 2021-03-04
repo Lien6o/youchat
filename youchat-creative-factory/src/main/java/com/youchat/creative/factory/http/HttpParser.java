@@ -1,10 +1,7 @@
 package com.youchat.creative.factory.http;
 
-import com.google.common.base.Splitter;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class HttpParser {
 
