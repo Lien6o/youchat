@@ -51,7 +51,7 @@ public class FluentValidator<T> {
     }
 
     /**
-     * 是否一旦发生验证错误就退出，默认为true
+     * 是否一旦发生验证错误就退出
      */
     private boolean isFailFast = false;
 
@@ -136,15 +136,15 @@ public class FluentValidator<T> {
      *
      * @return 对外验证结果
      */
-    public <R> R result(Result<R,T> function) {
+    public <R> R result(Result<R, T> function) {
         if (isPass) {
             return function.onSuccess(target);
         }
         return function.onFailure(errorList, target);
     }
 
-    interface Result<R,T> {
-        R onSuccess(  T t);
+    interface Result<R, T> {
+        R onSuccess(T t);
 
         R onFailure(List<String> list, T t);
     }
