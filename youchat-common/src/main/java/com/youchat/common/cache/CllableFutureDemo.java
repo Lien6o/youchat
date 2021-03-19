@@ -1,5 +1,6 @@
 package com.youchat.common.cache;
 
+import com.google.common.util.concurrent.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Nullable;
@@ -42,8 +43,9 @@ public class CllableFutureDemo {
 
             }
         },LISTENING_DECORATOR);
+        if (!Uninterruptibles.awaitUninterruptibly(new CountDownLatch(1), 1, TimeUnit.SECONDS)) {
+
+        }
     }
-
-
 
 }

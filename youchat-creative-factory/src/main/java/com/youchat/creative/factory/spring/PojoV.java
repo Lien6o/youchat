@@ -6,7 +6,6 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.SmartValidator;
 
-@Component
 public class PojoV {
     @Autowired
     private SmartValidator validator;

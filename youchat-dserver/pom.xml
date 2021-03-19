@@ -34,7 +34,16 @@
             <groupId>lien6o</groupId>
             <artifactId>youchat-common</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lien6o</groupId>
+            <artifactId>youchat-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>
