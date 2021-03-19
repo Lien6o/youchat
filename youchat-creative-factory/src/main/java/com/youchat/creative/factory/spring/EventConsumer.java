@@ -1,6 +1,5 @@
 package com.youchat.creative.factory.spring;
 
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
