@@ -18,26 +18,11 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RemoteCallSupporter {
 
-
     public static <T, R> List<R> concurrentCall(List<T> requestList, Integer ableSize, Function<List<T>, R> function, ExecutorService executorService, Long eachTimeOutMills) {
-        List<CompletableFuture<R>> completableFutures = Lists.partition(requestList, ableSize).stream()
+        return Lists.partition(requestList, ableSize).stream()
                 .map(list -> CompletableFuture.supplyAsync(FunctionSupporter.toSupplier(list, function), executorService))
+                .map(call(eachTimeOutMills))
                 .collect(Collectors.toList());
-        return completableFutures.stream().map(x -> {
-            try {
-                return x.get(eachTimeOutMills, TimeUnit.MILLISECONDS);
-            } catch (Exception e) {
-                log.error("concurrentCall ", e);
-                return null;
-            }
-        }).collect(Collectors.toList());
-    }
-
-    public static <T, R> List<R> concurrentCall2(List<T> requestList, Integer ableSize, Function<List<T>, R> function, ExecutorService executorService, Long eachTimeOutMills) {
-        List<CompletableFuture<R>> completableFutures = Lists.partition(requestList, ableSize).stream()
-                .map(list -> CompletableFuture.supplyAsync(FunctionSupporter.toSupplier(list, function), executorService))
-                .collect(Collectors.toList());
-        return completableFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
     }
 
     /**
@@ -45,7 +30,25 @@ public class RemoteCallSupporter {
      */
     @SneakyThrows
     public static <T, R> List<R> serializationCall(List<T> target, Integer ableSize, Function<List<T>, R> function) {
-        return concurrentCall(target, ableSize, function, MoreExecutors.newDirectExecutorService(),0L);
+        return concurrentCall(target, ableSize, function, MoreExecutors.newDirectExecutorService(), 0L);
     }
+
+    private static <R> Function<CompletableFuture<R>, R> call(Long eachTimeOutMills) {
+        return completableFuture -> {
+            try {
+                return completableFuture.get(eachTimeOutMills, TimeUnit.MILLISECONDS);
+            } catch (Exception e) {
+                log.error("concurrentCall ", e);
+                return null;
+            }
+        };
+    }
+
+    public static <T, R> List<R> concurrentCall2(List<T> requestList, Integer ableSize, Function<List<T>, R> function, ExecutorService executorService) {
+        return Lists.partition(requestList, ableSize).stream()
+                .map(list -> CompletableFuture.supplyAsync(FunctionSupporter.toSupplier(list, function), executorService))
+                .map(CompletableFuture::join).collect(Collectors.toList());
+    }
+
 
 }
