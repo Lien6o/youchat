@@ -68,6 +68,7 @@ public class HelloWord {
             System.out.println("andThen");
         });
         result.getOrElseThrow((Function<Throwable, RuntimeException>) RuntimeException::new);
+        result.getOrElseGet(null);
         Throwable cause = result.getCause();
         if (cause instanceof Exception) {
 
