@@ -11,7 +11,7 @@ public interface FunctionSupporter {
     /***
      * function -> supplier
      */
-    static <T, R> Supplier<R> toSupplier(T t,Function<T, R> function) {
+    static <T, R> Supplier<R> toSupplier(T t, Function<T, R> function) {
         return () -> function.apply(t);
     }
 

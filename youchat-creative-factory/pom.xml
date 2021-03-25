@@ -72,5 +72,11 @@
             <groupId>org.caffinitas.ohc</groupId>
             <artifactId>ohc-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

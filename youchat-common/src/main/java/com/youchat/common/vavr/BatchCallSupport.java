@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * @author enboli
  */
 @Slf4j
-public class RemoteCallSupporter {
+public class BatchCallSupport {
 
     public static <T, R> List<R> concurrentCall(List<T> requestList, Integer ableSize, Function<List<T>, R> function, ExecutorService executorService, Long eachTimeOutMills) {
         return Lists.partition(requestList, ableSize).stream()
