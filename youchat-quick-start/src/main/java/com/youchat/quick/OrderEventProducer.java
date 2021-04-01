@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
  * @version: v1.0
  */
 public class OrderEventProducer {
-    private RingBuffer<OrderEvent> ringBuffer;
+    private final RingBuffer<OrderEvent> ringBuffer;
 
     public OrderEventProducer(RingBuffer<OrderEvent> ringBuffer) {
         this.ringBuffer = ringBuffer;

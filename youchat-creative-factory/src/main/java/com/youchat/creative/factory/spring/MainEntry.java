@@ -22,7 +22,7 @@ public class MainEntry {
        // System.out.println(applicationContext.getBean("remoteClient"));
 
         EventService eventService = applicationContext.getBean(EventService.class);
-        eventService.sendEvent("lienbo2");
+        eventService.sendEvent("lienbo");
 
 
     }

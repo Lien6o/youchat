@@ -2,6 +2,7 @@ package com.youchat.quick;
 
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.RingBuffer;
+import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 
@@ -38,7 +39,7 @@ public class FirstEntry {
          */
         //1. 实例化disruptor对象
         Disruptor<OrderEvent> disruptor =
-                new Disruptor<>(orderEventFactory, ringBufferSize, executor, ProducerType.SINGLE, new BlockingWaitStrategy());
+                new Disruptor<>(orderEventFactory, ringBufferSize, executor, ProducerType.SINGLE, new YieldingWaitStrategy());
 
         //2. 添加消费者的监听 (构建disruptor 与 消费者的一个关联关系)
         disruptor.handleEventsWith(new OrderEventHandler());

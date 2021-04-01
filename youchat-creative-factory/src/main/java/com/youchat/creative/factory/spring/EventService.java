@@ -1,11 +1,13 @@
 package com.youchat.creative.factory.spring;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class EventService {
 
     @Autowired
@@ -21,6 +23,7 @@ public class EventService {
 //                return name;
 //            }
 //        });
+        log.info("EventService over");
 
     }
 }
