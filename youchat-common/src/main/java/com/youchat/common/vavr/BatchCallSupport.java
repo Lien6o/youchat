@@ -49,6 +49,4 @@ public class BatchCallSupport {
                 .map(list -> CompletableFuture.supplyAsync(FunctionSupporter.toSupplier(list, function), executorService))
                 .map(CompletableFuture::join).collect(Collectors.toList());
     }
-
-
 }

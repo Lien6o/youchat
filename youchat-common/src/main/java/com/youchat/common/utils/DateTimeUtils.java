@@ -231,7 +231,7 @@ public class DateTimeUtils {
      * @Author: lien6o
      * @Date: 2018/08/21
      */
-    public static String dateTimeFormatter(long dateTime, String formatter) {
+    public static String dateTimeFormatter(Long dateTime, String formatter) {
         Objects.requireNonNull(dateTime, "dateTime was null");
         Objects.requireNonNull(formatter, "formatter was null");
         return convertTimestamp2LocalDateTime(dateTime).format(DateTimeFormatter.ofPattern(formatter));

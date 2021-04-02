@@ -16,7 +16,7 @@ public class EventConsumer {
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, classes = Event.class)
     public void consumer(Event event) {
-        log.info("consumer event=" + event);
+        log.info("consumer TransactionalEventListener=" + event);
     }
 
 
