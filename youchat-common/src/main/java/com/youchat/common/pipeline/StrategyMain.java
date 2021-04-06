@@ -24,7 +24,7 @@ public class StrategyMain {
 
         // 这里将外部用户的逻辑提到上部
         chains.add(
-                Pair.of("逻辑2", query -> new Integer(1).equals(query.getUserType()), (powers, query) ->
+                Pair.of("逻辑2", query -> Integer.valueOf(1).equals(query.getUserType()), (powers, query) ->
                         {
                             powers.add("333");
                             return Lists.newArrayList(1,2,3);
@@ -34,7 +34,7 @@ public class StrategyMain {
 
         // 内部用户且PowerName有值
         chains.add(
-                Pair.of("逻辑3", query -> new Integer(0).equals(query.getUserType()), (powers, query) ->
+                Pair.of("逻辑3", query -> Integer.valueOf(0).equals(query.getUserType()), (powers, query) ->
                         {
                             powers.add(query.getType());
                             int a = 1/0;
@@ -57,6 +57,7 @@ public class StrategyMain {
         }
 
         // 这个逻辑是不会走的
+
         return new ArrayList<>();
     }
 

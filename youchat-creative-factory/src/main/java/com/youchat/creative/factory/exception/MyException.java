@@ -2,6 +2,7 @@ package com.youchat.creative.factory.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 
 /**
@@ -16,6 +17,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Accessors(chain = true)
 public class MyException extends RuntimeException {
 
     private int code;
@@ -28,9 +30,30 @@ public class MyException extends RuntimeException {
 
     /**
      * 自定义业务异常不打印堆栈
+     * https://stackoverflow.com/questions/9788993/why-is-throwable-fillinstacktrace-method-public-why-would-someone-use-it
+     * https://www.atlassian.com/blog/archives/if_you_use_exceptions_for_path_control_dont_fill_in_the_stac
+     *
+     *
+     * One reason is for performance.
+     * Throwing and catching an exception is cheap;
+     * the expensive part is filling in the stack trace.
+     * If you override fillInStackTrace() to do nothing, creating an exception also becomes cheap.
+     *
+     * With cheap exceptions, you can use exceptions for flow control,
+     * which can make the code more readable in certain situations;
+     * you can use them when when implementing JVM languages where you need more advanced flow control,
+     * and they are useful if you are writing an actors library.
      */
-    @Override
-    public Throwable fillInStackTrace() {
-        return this;
+     @Override
+     public Throwable fillInStackTrace() {
+         return this;
+     }
+
+    public static void main(String[] args) {
+        MyException myException = new MyException(1, "myException");
+
+        MyException myException1 = new MyException(1, "");
+        MyException myException2 = myException1.setCode(1).setErrorMessage("");
+        throw myException;
     }
 }

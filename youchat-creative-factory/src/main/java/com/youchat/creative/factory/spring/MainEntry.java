@@ -2,6 +2,8 @@ package com.youchat.creative.factory.spring;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Map;
+
 public class MainEntry {
 
     public static void main(String[] args) {
@@ -21,9 +23,16 @@ public class MainEntry {
 
        // System.out.println(applicationContext.getBean("remoteClient"));
 
-        EventService eventService = applicationContext.getBean(EventService.class);
-        eventService.sendEvent("lienbo");
+        // event test
+//        EventService eventService = applicationContext.getBean(EventService.class);
+//        eventService.sendEvent("lienbo");
 
+
+        Map<String, AbstractDemo> beansOfType = applicationContext.getBeansOfType(AbstractDemo.class);
+        AbstractDemo bean = applicationContext.getBean(AbstractDemo.class);
+        bean.execute();
+
+        System.out.println(beansOfType);
 
     }
 }
