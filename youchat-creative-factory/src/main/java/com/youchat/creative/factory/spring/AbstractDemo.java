@@ -10,12 +10,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class AbstractDemo {
 
     @Autowired
-    private EatService eatService;
+    protected EatService eatService;
 
-    protected abstract void needImpl();
+    protected abstract String needImpl();
 
+    /**
+     * 10:37:47.313 [main] INFO org.springframework.aop.framework.CglibAopProxy -
+     * Final method [public final void com.youchat.creative.factory.spring.AbstractDemo.execute()] cannot get proxied via CGLIB:
+     * Calls to this method will NOT be routed to the target instance and might lead to NPEs against uninitialized fields in the proxy instance.
+     */
+    @DummyTransactional
     public final void execute() {
         needImpl();
-        eatService.eat();
+        System.out.println("public final void execute() " + eatService + " " + eatService.eat());
+        ex();
+    }
+
+    private void ex() {
+        System.out.println("private void ex()  " + eatService.eat());
     }
 }

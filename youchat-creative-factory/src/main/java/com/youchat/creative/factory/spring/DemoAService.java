@@ -7,18 +7,21 @@ import org.springframework.stereotype.Component;
  * @author Lien6o
  */
 @Component
-public class DemoAService extends AbstractDemo{
+public class DemoAService extends AbstractDemo {
 
-    private final EatService eatService;
 
-    @Autowired
-    public DemoAService(EatService eatService) {
-        this.eatService = eatService;
+    // com.youchat.creative.factory.spring.DemoAService@a5b0b86
+
+    protected String needImpl() {
+        return eatService.eat();
     }
 
-    @Override
-    protected void needImpl() {
-        System.out.println("needImpl：");
-        eatService.eat();
+    @DummyTransactional
+    public void self() {
+        System.out.println("this = " + this);
+
+        System.out.println("self eatService = " + eatService + " super " + super.eatService);
+        System.out.println();
+
     }
 }

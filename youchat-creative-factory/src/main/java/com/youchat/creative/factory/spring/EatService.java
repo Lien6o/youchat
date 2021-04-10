@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EatService {
 
-    public void eat() {
-        System.out.println("EatService.eat");
+    public String eat() {
+        return "eat() execute";
     }
 }

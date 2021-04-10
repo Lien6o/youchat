@@ -1,5 +1,6 @@
 package com.youchat.creative.factory.spring;
 
+import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Map;
@@ -19,20 +20,19 @@ public class MainEntry {
          * System.out.println(bean);
          */
 
-       // System.out.println(applicationContext.getBean("remoteClientV2"));
+        // System.out.println(applicationContext.getBean("remoteClientV2"));
 
-       // System.out.println(applicationContext.getBean("remoteClient"));
+        // System.out.println(applicationContext.getBean("remoteClient"));
 
         // event test
 //        EventService eventService = applicationContext.getBean(EventService.class);
 //        eventService.sendEvent("lienbo");
 
 
-        Map<String, AbstractDemo> beansOfType = applicationContext.getBeansOfType(AbstractDemo.class);
-        AbstractDemo bean = applicationContext.getBean(AbstractDemo.class);
-        bean.execute();
 
-        System.out.println(beansOfType);
+        DemoAService demoAService = applicationContext.getBean(DemoAService.class);
 
+        demoAService.self();
+        demoAService.execute();
     }
 }
