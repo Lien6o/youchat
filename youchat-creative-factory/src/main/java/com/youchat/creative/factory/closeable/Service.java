@@ -16,8 +16,6 @@ public class Service implements AutoCloseable {
     public AutoCloseable stop() {
         System.out.println("stop()");
 
-        return () -> {
-            System.out.println("close stop()");
-        };
+        return () -> {    System.out.println("close stop()");  };
     }
 }
