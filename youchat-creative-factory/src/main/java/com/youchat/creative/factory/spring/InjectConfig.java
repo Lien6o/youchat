@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.support.TaskUtils;
 
 import java.util.concurrent.*;
 
@@ -31,13 +33,20 @@ public class InjectConfig implements AsyncConfigurer {
 //        return new SimpleAsyncTaskExecutor();
 //    }
 
+    /**
+     * 事件广播器
+     * @return
+     */
+     @Bean
+     public SimpleApplicationEventMulticaster applicationEventMulticaster() {
+         SimpleApplicationEventMulticaster simpleApplicationEventMulticaster = new SimpleApplicationEventMulticaster();
+         // 若设置 以下代码这 完全异步发送
+         // simpleApplicationEventMulticaster.setTaskExecutor(EXECUTOR);
+         // 以error日志的方式完成事件扫描
+         simpleApplicationEventMulticaster.setErrorHandler(TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER);
 
-//    @Bean
-//    public SimpleApplicationEventMulticaster applicationEventMulticaster() {
-//        SimpleApplicationEventMulticaster simpleApplicationEventMulticaster = new SimpleApplicationEventMulticaster();
-//        simpleApplicationEventMulticaster.setTaskExecutor(EXECUTOR);
-//        return simpleApplicationEventMulticaster;
-//    }
+         return simpleApplicationEventMulticaster;
+     }
 
     @Bean
     public RemoteClient remoteClientV2() {
