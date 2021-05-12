@@ -10,17 +10,17 @@
 
 		if(window.WebSocket){
 			socket = new WebSocket("ws://localhost:8888/websocket");
-			socket.onmessage = function(event){
+			socket.onmessage = function(namedEvent){
 				var ta = document.getElementById('responseContent');
-				ta.value += event.data + "\r\n";
+				ta.value += namedEvent.data + "\r\n";
 			};
 
-			socket.onopen = function(event){
+			socket.onopen = function(namedEvent){
 				var ta = document.getElementById('responseContent');
 				ta.value = "你当前的浏览器支持WebSocket,请进行后续操作\r\n";
 			};
 
-			socket.onclose = function(event){
+			socket.onclose = function(namedEvent){
 				var ta = document.getElementById('responseContent');
 				ta.value = "";
 				ta.value = "WebSocket连接已经关闭\r\n";

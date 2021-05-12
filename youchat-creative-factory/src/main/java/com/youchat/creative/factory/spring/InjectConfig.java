@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -35,18 +36,36 @@ public class InjectConfig implements AsyncConfigurer {
 
     /**
      * 事件广播器
+     *
      * @return
      */
-     @Bean
-     public SimpleApplicationEventMulticaster applicationEventMulticaster() {
-         SimpleApplicationEventMulticaster simpleApplicationEventMulticaster = new SimpleApplicationEventMulticaster();
-         // 若设置 以下代码这 完全异步发送
-         // simpleApplicationEventMulticaster.setTaskExecutor(EXECUTOR);
-         // 以error日志的方式完成事件扫描
-         simpleApplicationEventMulticaster.setErrorHandler(TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER);
+//    @Bean
+//    public SimpleApplicationEventMulticaster applicationEventMulticaster() {
+//        SimpleApplicationEventMulticaster simpleApplicationEventMulticaster = new SimpleApplicationEventMulticaster();
+//        // 若设置 以下代码这 完全异步发送
+//        simpleApplicationEventMulticaster.setTaskExecutor(Executors.newFixedThreadPool(3));
+//        // 以error日志的方式完成事件扫描
+//        simpleApplicationEventMulticaster.setErrorHandler(TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER);
+//
+//        return simpleApplicationEventMulticaster;
+//    }
 
-         return simpleApplicationEventMulticaster;
-     }
+    /**
+     * 可以自定义 但是 bean name 必须是 applicationEventMulticaster
+     *
+     * @see ApplicationEventMulticaster
+     */
+    @Bean("applicationEventMulticaster")
+    public TestApplicationEventMulticaster testApplicationEventMulticaster() {
+        TestApplicationEventMulticaster multicaster = new TestApplicationEventMulticaster();
+        // 若设置 以下代码这 完全异步发送
+        multicaster.setTaskExecutor(Executors.newFixedThreadPool(3));
+        // 以error日志的方式完成事件扫描
+        multicaster.setErrorHandler(TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER);
+
+        return multicaster;
+    }
+
 
     @Bean
     public RemoteClient remoteClientV2() {
@@ -80,7 +99,7 @@ public class InjectConfig implements AsyncConfigurer {
         return MoreExecutors.directExecutor();
     }
 
-    @Bean(name = "new_task2" )
+    @Bean(name = "new_task2")
     public Executor taskExecutor2() {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors() * 2
                 , Runtime.getRuntime().availableProcessors() * 4

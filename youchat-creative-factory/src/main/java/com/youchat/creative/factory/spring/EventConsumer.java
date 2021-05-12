@@ -9,38 +9,40 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
+
 @Slf4j
-@Async("new_task2")
 public class EventConsumer {
 
 
-    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, classes = Event.class)
-    public void consumer(Event event) {
-        log.info("consumer TransactionalEventListener=" + event);
+    @SuppressWarnings("unused")
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, classes = NamedEvent.class)
+    public void consumer(NamedEvent namedEvent) {
+        log.info("consumer TransactionalEventListener=" + namedEvent);
     }
 
 
-    @EventListener(classes = Event.class, condition = "#event.name.equals('lienbo')")
-    public void consumer2(Event event) {
-        log.info("consumer2 event=" + event);
+    @Async
+    @EventListener(classes = NamedEvent.class, condition = "#namedEvent.name.equals('lienbo')")
+    public void consumer2(NamedEvent namedEvent) {
+        log.info("consumer2 namedEvent=" + namedEvent);
     }
 
     @SneakyThrows
-    @EventListener(classes = Event.class, condition = "#event.name.equals('lienbo')")
-    public void consumer3(Event event) {
+    @EventListener(classes = NamedEvent.class, condition = "#namedEvent.name.equals('lienbo')")
+    public void consumer3(NamedEvent namedEvent) {
         Thread.sleep(5000L);
-        log.info("consumer3 event=" + event);
+        log.info("consumer3 namedEvent=" + namedEvent);
     }
 
     @SneakyThrows
-    @EventListener(classes = Event.class, condition = "#event.name.equals('lienbo')")
-    public void consumer4(Event event) {
+    @EventListener(classes = NamedEvent.class, condition = "#namedEvent.name.equals('lienbo')")
+    public void consumer4(NamedEvent namedEvent) {
 
-        log.info("consumer4 event=" + event);
+        log.info("consumer4 namedEvent=" + namedEvent);
     }
 
-    @EventListener(classes = Event.class, condition = "#event.name.equals('lienbo')")
-    public void consumer5(Event event) {
-        log.info("consumer5 event=" + event);
+    @EventListener(classes = NamedEvent.class, condition = "#namedEvent.name.equals('lienbo')")
+    public void consumer5(NamedEvent namedEvent) {
+        log.info("consumer5 namedEvent=" + namedEvent);
     }
 }

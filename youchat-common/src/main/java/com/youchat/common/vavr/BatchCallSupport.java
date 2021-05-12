@@ -26,13 +26,14 @@ public class BatchCallSupport {
      */
     private static final ExecutorService executorService = new ThreadPoolExecutor(20
             , 40
-            , 0
+            , 10
             , TimeUnit.MINUTES
-            , new LinkedBlockingQueue<>(2),
+            , new LinkedBlockingQueue<>(100),
             runnable -> {
                 THREAD_ADDER.increment();
                 return new Thread(runnable, THREAD_NAME + THREAD_ADDER.intValue());
             }, (runnable, executor) -> {
+        System.err.println("xxxxxxxxxx");
     });
 
     public static <T, R> List<R> concurrentCall(List<T> requestList, Integer ableSize, Function<List<T>, R> function, ExecutorService executorService, Long eachTimeOutMills) {
@@ -66,23 +67,34 @@ public class BatchCallSupport {
 
 
     public static void main(String[] args) {
-        LongAdder count = new LongAdder();
-        ArrayList<Integer> integers = Lists.newArrayList();
+         LongAdder count = new LongAdder();
+//        ArrayList<Integer> integers = Lists.newArrayList();
+//        for (int i = 0; i < 100; i++) {
+//            integers.add(i);
+//        }
+//        List<String> strings = concurrentCall(integers, 2, new Function<List<Integer>, String>() {
+//            @SneakyThrows
+//            @Override
+//            public String apply(List<Integer> integers) {
+//                count.increment();
+//                System.out.println("Thread.currentThread() = " + Thread.currentThread().getName() + " Time=" + System.currentTimeMillis() + " count" + count.intValue());
+//
+//                Thread.sleep(1000);
+//                System.err.println("Thread.currentThread() = " + Thread.currentThread().getName() + " Time=" + System.currentTimeMillis() + " count" + count.intValue());
+//
+//                return integers.toString();
+//            }
+//        }, executorService, 20L);
         for (int i = 0; i < 100; i++) {
-            integers.add(i);
+            executorService.submit(new Runnable() {
+                @SneakyThrows
+                @Override
+                public void run() {
+                    count.increment();
+                    Thread.sleep(1000);
+                    System.out.println("Thread.currentThread() = " + Thread.currentThread().getName() + " Time=" + System.currentTimeMillis() + " count" + count.intValue());
+                }
+            });
         }
-        List<String> strings = concurrentCall(integers, 2, new Function<List<Integer>, String>() {
-            @SneakyThrows
-            @Override
-            public String apply(List<Integer> integers) {
-                count.increment();
-                System.out.println("Thread.currentThread() = " + Thread.currentThread().getName() + " Time=" + System.currentTimeMillis() + " count" + count.intValue());
-
-                Thread.sleep(1000);
-                System.err.println("Thread.currentThread() = " + Thread.currentThread().getName() + " Time=" + System.currentTimeMillis() + " count" + count.intValue());
-
-                return integers.toString();
-            }
-        }, executorService, 20L);
     }
 }

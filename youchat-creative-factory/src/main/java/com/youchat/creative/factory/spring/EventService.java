@@ -2,7 +2,6 @@ package com.youchat.creative.factory.spring;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +14,8 @@ public class EventService {
 
     public void sendEvent(String name) {
 
-        Event event = new Event(name);
-        publisher.publishEvent(event);
+        NamedEvent namedEvent = new NamedEvent(name);
+        publisher.publishEvent(namedEvent);
 //        publisher.publishEvent(new ApplicationEvent(name) {
 //            @Override
 //            public Object getSource() {

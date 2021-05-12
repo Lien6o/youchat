@@ -11,11 +11,11 @@ import org.springframework.context.ApplicationEvent;
 @ToString
 @Getter
 @Setter
-public class Event extends ApplicationEvent {
+public class NamedEvent extends ApplicationEvent {
 
     private String name;
 
-    public Event(String name) {
+    public NamedEvent(String name) {
         super(name);
         this.name = name;
     }

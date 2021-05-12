@@ -18,14 +18,14 @@ public SimpleApplicationEventMulticaster applicationEventMulticaster() {
 public class EventConsumer {
 
 @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, classes = Event.class)
-public void consumer(Event event) {
-    log.info("consumer TransactionalEventListener=" + event);
+public void consumer(Event namedEvent) {
+    log.info("consumer TransactionalEventListener=" + namedEvent);
 }
 
 @Async("new_task_")
-@EventListener(classes = Event.class, condition = "#event.name.equals('lienbo')")
-public void consumer2(Event event) {
-    log.info("consumer2 event=" + event);
+@EventListener(classes = Event.class, condition = "#namedEvent.name.equals('lienbo')")
+public void consumer2(Event namedEvent) {
+    log.info("consumer2 namedEvent=" + namedEvent);
 }
 }
 ```
@@ -33,7 +33,7 @@ public void consumer2(Event event) {
 * 事务事件解耦
 ```java
 @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, classes = Event.class)
-public void consumer(Event event) {
+public void consumer(Event namedEvent) {
     // do some thing after Transaction
 }
 ```
