@@ -25,8 +25,8 @@ public class MainEntry {
       // System.out.println(applicationContext.getBean("remoteClient"));
 
       // event test
-        EventService eventService = applicationContext.getBean(EventService.class);
-        eventService.sendEvent("lienbo");
+//        EventService eventService = applicationContext.getBean(EventService.class);
+//        eventService.sendEvent("lienbo");
 
 
 
@@ -34,5 +34,16 @@ public class MainEntry {
 
    //    demoAService.self();
    //    demoAService.execute();
+
+        InnerBean bean1 = applicationContext.getBean(InnerBean.class);
+        System.out.println("bean1 = " + bean1);
+        InnerBean.CheckA bean = applicationContext.getBean(InnerBean.CheckA.class);
+        bean.check();
+        InnerBean innerBean = (InnerBean) applicationContext.getBean("innerBean");
+        System.out.println("innerBean = " + innerBean);
+        InnerBean.CheckB bean2 = (InnerBean.CheckB) applicationContext.getBean("com.youchat.creative.factory.spring.InnerBean$CheckB");
+        bean2.check();
+        InnerBean.CheckA bean3 = (InnerBean.CheckA) applicationContext.getBean("innerBean.CheckA");
+        bean3.check();
     }
 }
